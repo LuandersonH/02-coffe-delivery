@@ -1,6 +1,8 @@
 import { HeaderContainer } from "./Header.styles";
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logo.png";
 import { MapPin, ShoppingCart } from "phosphor-react";
+
+const shopAmount = 1;
 
 export function Header() {
   return (
@@ -10,16 +12,15 @@ export function Header() {
       </div>
       <div>
         <div className="local">
-            <MapPin size={22} weight="fill"/> 
-            <span>São Paulo, SP</span>
+          <MapPin size={22} weight="fill" />
+          <span>São Paulo, SP</span>
         </div>
         <div className="shop">
-            <span>
-                <ShoppingCart size={22} weight="fill"/>
-            </span>
-            <div className="countShop">3</div>
+          <span>
+            <ShoppingCart size={22} weight="fill" />
+          </span>
+          {shopAmount > 0 && <div className="countShop">{shopAmount}</div>}
         </div>
-        
       </div>
     </HeaderContainer>
   );

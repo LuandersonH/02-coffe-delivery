@@ -38,31 +38,32 @@ export const HeaderContainer = styled.div`
       background: ${(props) => props.theme["yellow-light"]};
       color: ${(props) => props.theme["yellow-dark"]};
       padding: 0.5rem;
-
-      .countShop {
-        position: absolute;
-        top: -10px;
-        right: -10px; 
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-
-        background: ${(props) => props.theme["yellow-dark"]}; 
-        color: white;
-
-        font-size: 0.75rem;
-        font-weight: bold;
-      }
     }
 
     > div > svg {
       display: inline-block;
       vertical-align: middle;
     }
+
+    .countShop {
+      position: absolute;
+      top: -10px;
+      right: -10px; 
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+
+      background: ${(props) => props.theme["yellow-dark"]}; 
+      color: white;
+
+      font-size: 0.75rem;
+      font-weight: bold;
+}
   }
 `;
+
