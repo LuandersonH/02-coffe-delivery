@@ -1,63 +1,42 @@
-import { CoffeListContainer } from "./CoffeList.styles";
+import { ShoppingCart } from "phosphor-react";
+import { CardFooter, CoffeCard, CoffeListContainer } from "./CoffeList.styles";
 
-export function CoffeList() {
-  function TradicionalButton() {
-    // if (value === tradicional) = mostre os cards que tem o coffeType tradicional e oculte os outros
-  }
+interface CardsData {
+  img: string;
+  typeCoffe: string;
+  titleCoffe: string;
+  descriptionCoffe: string;
+  valueCoffe: number;
+}
 
-  function EspecialButton() {}
-  function ComLeiteButton() {}
-  function AlcoólicoButton() {}
-  function GeladoButton() {}
+interface CardDetailsProps {
+  cards: CardsData;
+}
 
+export function CoffeList({cards}: CardDetailsProps) {
   return (
     <CoffeListContainer>
-      <div className="coffeListHeader">
-        <p>Nossos cafés</p>
-        <div>
-          <button
-            onClick={() => {
-              TradicionalButton();
-            }}
-            value="TRADICIONAL"
-          >
-            TRADICIONAL
-          </button>
-          <button
-            onClick={() => {
-              EspecialButton();
-            }}
-            value="TRADICIONAL"
-          >
-            ESPECIAL
-          </button>
-          <button
-            onClick={() => {
-              ComLeiteButton();
-            }}
-            value="TRADICIONAL"
-          >
-            COM LEITE
-          </button>
-          <button
-            onClick={() => {
-              AlcoólicoButton();
-            }}
-            value="TRADICIONAL"
-          >
-            ALCOÓLICO
-          </button>
-          <button
-            onClick={() => {
-              GeladoButton();
-            }}
-            value="TRADICIONAL"
-          >
-            GELADO
-          </button>
+      <CoffeCard>
+        <div className="imgCard">
+            <img src="https://5287aa00874a313e299d-1850966fc307ff23e1e789aeafd2476b.ssl.cf5.rackcdn.com/PostImagem/50205/imagem-feita-por-ia-vence-concurso-fotograacutefico_o1gpt0htc9sb14gm2f1mss1iove.jpg"/>
         </div>
-      </div>
-      <div>conteúdo da coffelist</div>
+        <p className="typeCard">TRADICIONAL</p>
+        <p className="titleCard">Expresso Tradicional</p>
+        <p className="subtitleCard">Lorem ipsum dolor sit amet, consectetur adipisicing elitctio..</p>
+        <CardFooter>
+          <div className="priceCardFooter">
+            <p><span>R$</span>9.90</p>
+          </div>
+          <div>
+              <div className="buttonCardFooter">
+                  <button>-</button>
+                  <span>1</span>
+                  <button>+</button>
+              </div>
+              <ShoppingCart weight="fill" size={38}/>
+          </div>
+        </CardFooter>
+      </CoffeCard>
     </CoffeListContainer>
   );
 }

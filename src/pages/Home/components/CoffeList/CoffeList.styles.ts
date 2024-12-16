@@ -1,56 +1,99 @@
 import styled from "styled-components";
 
 export const CoffeListContainer = styled.div`
-  width: 100%;
-  height: auto;
-  padding: 5.75rem 10rem;
+width: 100%;
+padding: 0 10rem;
+display: flex;
+`
 
-  .coffeListHeader {
+export const CoffeCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 256px;
+  height: 310px;
+  background-color: ${(props) => props.theme["base-card"]};
+  gap: 0px;
+
+  .imgCard {
+    margin-top: -20px;
+    margin-bottom: 8px;
+    img {
+      height: 120px;
+    }
+  }
+
+  .typeCard {
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.5rem;
+    background: ${(props) => props.theme["yellow-light"]};
+    color: ${(props) => props.theme["yellow-dark"]};
+    border-radius: 100px;
+    font-size: 0.625rem;
+    font-weight: bold;
+    
+  }
+
+  .titleCard {
+    padding: 0rem 1.25rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: ${(props) => props.theme["base-subtitle"]};
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitleCard {
+    padding: 0rem 1.25rem;
+    font-size: 0.875rem;
+    color: ${(props) => props.theme["base-label"]};
+    margin-bottom: 1.5rem;
+  }
+`;
+
+export const CardFooter = styled.div`
+  display: flex;
+  width: 100%;
+  height: 2.375rem;
+  padding: 0rem 1.25rem;
+  justify-content: space-between;
+
+  .priceCardFooter {
+    display: flex;
+    color: ${(props) => props.theme["base-text"]};
+    gap: 0 0.25rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+
+    span {
+      font-size: 0.875rem;
+      font-weight: normal;
+    }
+  }
+
+  div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0 0.5rem;
 
-    > p {
-      display: inline-flex;
-
-      font-family: "Baloo 2", serif;
-      font-size: 2rem;
-      font-weight: bolder;
-
-      color: ${(props) => props.theme["base-subtitle"]};
+    .buttonCardFooter {
+      background: ${(props) => props.theme["base-button"]};
+      border-radius: 0.375rem;
+      gap: 0 0.25rem;
+      button {
+        background: transparent;
+        border: none;
+        width: 1rem;
+        color: ${(props) => props.theme.purple};
+      }
     }
 
-    > div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-
-      > button {
-        background: transparent;
-        padding: 0.375rem 0.75rem;
-
-        border: 1px solid ${(props) => props.theme.yellow};
-        border-radius: 100px;
-
-        font-size: 10px;
-        font-weight: bold;
-        color: ${(props) => props.theme["yellow-dark"]};
-        
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.5px ${(props) => props.theme['yellow-dark']};
-        }
-
-        &:active {
-            background: ${(props) => props.theme["yellow-light"]};
-        }
-
-        &:hover {
-            background: ${(props) => props.theme["yellow-light"]};
-            cursor: pointer;
-        }
-      }
+    svg {
+      padding: 0.5rem;
+      color: ${(props) => props.theme.white};
+      background: ${(props) => props.theme["purple-dark"]};
+      border-radius: 0.375rem;
     }
   }
 `;
