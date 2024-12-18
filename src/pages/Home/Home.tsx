@@ -5,14 +5,14 @@ import { HomeContainer } from "./Home.styles";
 
 interface CardsData {
   img: string;
-  typeCoffe: string;
+  typeCoffe: string[];
   titleCoffe: string;
   descriptionCoffe: string;
   valueCoffe: number;
 }
 
 interface HomeProps {
-  cards: CardsData;
+  cards: CardsData[];
 }
 
 export function Home({ cards }: HomeProps) {
