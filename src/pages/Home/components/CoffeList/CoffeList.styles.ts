@@ -89,6 +89,10 @@ export const CardFooter = styled.div`
         border: none;
         width: 1rem;
         color: ${(props) => props.theme.purple};
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: not-allowed;
       }
     }
 

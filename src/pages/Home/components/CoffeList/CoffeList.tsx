@@ -15,36 +15,52 @@ interface CardDetailsProps {
   cards: CardsData[];
 }
 
-export function CoffeList({cards}: CardDetailsProps) {
+export function CoffeList({ cards }: CardDetailsProps) {
+  const [shopAmounts, setShopAmounts] = useState(
+    () => cards.map(() => 0) // Inicializa com 0 para cada card
+  );
+
+  const updateShopAmount = (index: number, amount: number) => {
+    setShopAmounts((state) =>
+      state.map((value, i) => (i === index ? value + amount : value))
+    );
+  };
 
   return (
     <CoffeListContainer>
-        {cards.map((el, index)=>{
-          const [shopAmountState, setShopAmountState] = useState(Number(el.shopAmount))
-          return (
+      {cards.map((el, index) => {
+        return (
           <CoffeCard key={index}>
-          <div className="imgCard">
-              <img src={el.img}/>
-          </div>
-          <p className="typeCard">{el.typeCoffe}</p>
-          <p className="titleCard">{el.titleCoffe}</p>
-          <p className="subtitleCard">{el.descriptionCoffe}</p>
-          <CardFooter>
-            <div className="priceCardFooter">
-              <p><span>R$</span>{el.valueCoffe.toFixed(2)}</p>
+            <div className="imgCard">
+              <img src={el.img} />
             </div>
-            <div>
+            <p className="typeCard">{el.typeCoffe}</p>
+            <p className="titleCard">{el.titleCoffe}</p>
+            <p className="subtitleCard">{el.descriptionCoffe}</p>
+            <CardFooter>
+              <div className="priceCardFooter">
+                <p>
+                  <span>R$</span>
+                  {el.valueCoffe.toFixed(2)}
+                </p>
+              </div>
+              <div>
                 <div className="buttonCardFooter">
-                    <button onClick={()=>setShopAmountState(prev => prev > 0 ? prev-1 : prev-0)}>-</button>
-                    <span>{shopAmountState}</span>
-                    <button onClick={() => setShopAmountState(prev => prev + 1)}>+</button>
+                  <button
+                    onClick={() => updateShopAmount(index, -1)}
+                    disabled={shopAmounts[index] <= 0}
+                  >
+                    -
+                  </button>
+                  <span>{shopAmounts[index]}</span>
+                  <button onClick={() => updateShopAmount(index, +1)}>+</button>
                 </div>
-                <ShoppingCart weight="fill" size={38}/>
-            </div>
-          </CardFooter>
-        </CoffeCard>
-        )})}
-        
+                <ShoppingCart weight="fill" size={38} />
+              </div>
+            </CardFooter>
+          </CoffeCard>
+        );
+      })}
     </CoffeListContainer>
   );
 }
