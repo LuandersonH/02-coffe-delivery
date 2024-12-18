@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const CoffeListFilterContainer = styled.div`
-  width: 100%;
+  width: 70rem;
   height: auto;
-  padding: 5.75rem 10rem;
+  padding: 5.75rem 0rem;
 
   .coffeListHeader {
     display: flex;
@@ -36,19 +36,19 @@ export const CoffeListFilterContainer = styled.div`
         font-size: 10px;
         font-weight: bold;
         color: ${(props) => props.theme["yellow-dark"]};
-        
+
         &:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.5px ${(props) => props.theme['yellow-dark']};
+          outline: none;
+          box-shadow: 0 0 0 0.5px ${(props) => props.theme["yellow-dark"]};
         }
 
         &:active {
-            background: ${(props) => props.theme["yellow-light"]};
+          background: ${(props) => props.theme["yellow-light"]};
         }
 
         &:hover {
-            background: ${(props) => props.theme["yellow-light"]};
-            cursor: pointer;
+          background: ${(props) => props.theme["yellow-light"]};
+          cursor: pointer;
         }
       }
     }

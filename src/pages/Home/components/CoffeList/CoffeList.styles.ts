@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const CoffeListContainer = styled.div`
-width: 100%;
-padding: 0 10rem;
-display: flex;
-`
+  width: 70rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+  gap: 2.5rem 2rem;
+`;
 
 export const CoffeCard = styled.div`
   display: flex;
@@ -32,7 +36,6 @@ export const CoffeCard = styled.div`
     border-radius: 100px;
     font-size: 0.625rem;
     font-weight: bold;
-    
   }
 
   .titleCard {
