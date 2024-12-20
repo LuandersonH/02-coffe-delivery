@@ -7,8 +7,8 @@ export const HeaderContainer = styled.div`
 
   > div {
     width: 70rem;
-    height: 104px;
-    padding: 2rem 10rem;
+    height: 6.5rem;
+    padding: 2rem 0rem;
 
     display: flex;
     justify-content: space-between;

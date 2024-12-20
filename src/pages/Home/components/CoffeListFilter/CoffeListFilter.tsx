@@ -1,14 +1,29 @@
 import { CoffeListFilterContainer } from "./CoffeListFilter.styles";
 
-export function CoffeListFilter() {
+
+export function CoffeListFilter({ filterCoffeValue, setFilterCoffeValue }: any) {
+  console.log(filterCoffeValue);
+  
+
   function TradicionalButton() {
-    // if (value === tradicional) = mostre os cards que tem o coffeType tradicional e oculte os outros
+    setFilterCoffeValue("TRADICIONAL");
   }
 
-  function EspecialButton() {}
-  function ComLeiteButton() {}
-  function AlcoólicoButton() {}
-  function GeladoButton() {}
+  function EspecialButton() {
+     setFilterCoffeValue("ESPECIAL");
+  }
+
+  function ComLeiteButton() {
+     setFilterCoffeValue("COM LEITE");
+  }
+
+  function AlcoólicoButton() {
+     setFilterCoffeValue("ALCOÓLICO");
+  }
+
+  function GeladoButton() {
+     setFilterCoffeValue("GELADO");
+  }
 
   return (
     <CoffeListFilterContainer>
@@ -19,7 +34,6 @@ export function CoffeListFilter() {
             onClick={() => {
               TradicionalButton();
             }}
-            value="TRADICIONAL"
           >
             TRADICIONAL
           </button>
@@ -27,7 +41,6 @@ export function CoffeListFilter() {
             onClick={() => {
               EspecialButton();
             }}
-            value="TRADICIONAL"
           >
             ESPECIAL
           </button>
@@ -35,7 +48,6 @@ export function CoffeListFilter() {
             onClick={() => {
               ComLeiteButton();
             }}
-            value="TRADICIONAL"
           >
             COM LEITE
           </button>
@@ -43,7 +55,6 @@ export function CoffeListFilter() {
             onClick={() => {
               AlcoólicoButton();
             }}
-            value="TRADICIONAL"
           >
             ALCOÓLICO
           </button>
@@ -51,7 +62,6 @@ export function CoffeListFilter() {
             onClick={() => {
               GeladoButton();
             }}
-            value="TRADICIONAL"
           >
             GELADO
           </button>

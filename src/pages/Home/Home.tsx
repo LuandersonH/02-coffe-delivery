@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { CoffeList } from "./components/CoffeList/CoffeList";
 import { CoffeListFilter } from "./components/CoffeListFilter/CoffeListFilter";
-import { Intro } from './components/Intro/Intro'
+import { Intro } from "./components/Intro/Intro";
 import { HomeContainer } from "./Home.styles";
 
 interface CardsData {
@@ -16,11 +17,13 @@ interface HomeProps {
 }
 
 export function Home({ cards }: HomeProps) {
+  const [filterCoffeValue, setFilterCoffeValue ] = useState<string | undefined>(undefined)
+
   return (
     <HomeContainer>
-      <Intro/>
-      <CoffeListFilter />
-      <CoffeList cards={cards}/>
+      <Intro />
+      <CoffeListFilter filterCoffeValue={filterCoffeValue, setFilterCoffeValue} />
+      <CoffeList cards={cards} filterCoffeValue={filterCoffeValue}/>
     </HomeContainer>
   );
 }

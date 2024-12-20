@@ -19,6 +19,7 @@ import imgCubano from "./assets/coffes/imgCubano.png";
 import imgHavaiano from "./assets/coffes/imgHavaiano.png";
 import imgArabe from "./assets/coffes/imgArabe.png";
 import imgIrlandes from "./assets/coffes/imgIrlandes.png";
+import { Teste } from "./Contexts/ShopContext";
 
 export interface cardsData {
   img: string;
@@ -30,7 +31,7 @@ export interface cardsData {
 }
 
 export function App() {
-  const [cards, setCarts] = useState<cardsData[]>([
+  const [cards, setCards] = useState<cardsData[]>([
     {
       img: imgTradicional,
       typeCoffe: ["TRADICIONAL"],
@@ -155,11 +156,36 @@ export function App() {
     },
   ]);
 
+  // <button onClick={()=>{
+  //   setCards([
+  //     {
+  //       img: imgIrlandes,
+  //       typeCoffe: ["ESPECIAL", "ALCOÓLICO"],
+  //       titleCoffe: "Irlandês",
+  //       descriptionCoffe:
+  //         "Bebida à base de café, uísque irlandês, açúcar e chantilly",
+  //       valueCoffe: 9.9,
+  //       shopAmount: 0,
+  //     },
+  //   ]);}
+
+
+  const [shopAmounts, setShopAmounts] = useState(() => cards.map(() => 0));
+
+  const totalProdutos: number = shopAmounts.reduce((total, el) => total + el, 0);
+
+  // const updateShopAmount = (index: number, amount: number) => {
+  // setShopAmounts((state) =>
+  //   state.map((value, i) => (i === index ? value + amount : value))
+  // );
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Header />
-      <Home cards={cards} />
-      <GlobalStyle />
+      <Teste.Provider value={{ shopAmounts, setShopAmounts }}>
+        <Header totalProdutos={totalProdutos} />
+        <Home cards={cards}/>
+        <GlobalStyle />
+      </Teste.Provider>
     </ThemeProvider>
   );
 }

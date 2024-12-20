@@ -2,9 +2,12 @@ import { HeaderContainer } from "./Header.styles";
 import logo from "../../assets/logo.png";
 import { MapPin, ShoppingCart } from "phosphor-react";
 
-const shopAmount = 1;
+interface headerProps {
+  totalProdutos: number;
+}
 
-export function Header() {
+export function Header({ totalProdutos }: headerProps) {
+
   return (
     <HeaderContainer>
       <div>
@@ -20,7 +23,7 @@ export function Header() {
             <span>
               <ShoppingCart size={22} weight="fill" />
             </span>
-            {shopAmount > 0 && <div className="countShop">{shopAmount}</div>}
+            {totalProdutos > 0 && <div className="countShop">{totalProdutos}</div>}
           </div>
         </div>
       </div>
