@@ -15,14 +15,13 @@ interface CardsData {
 interface HomeProps {
   cards: CardsData[];
 }
-
 export function Home({ cards }: HomeProps) {
-  const [filterCoffeValue, setFilterCoffeValue ] = useState<string | undefined>(undefined)
+  const [filterCoffeValue, setFilterCoffeValue ] = useState<string[]>([])
 
   return (
     <HomeContainer>
       <Intro />
-      <CoffeListFilter filterCoffeValue={filterCoffeValue, setFilterCoffeValue} />
+      <CoffeListFilter filterCoffeValue={filterCoffeValue} setFilterCoffeValue={setFilterCoffeValue} />
       <CoffeList cards={cards} filterCoffeValue={filterCoffeValue}/>
     </HomeContainer>
   );

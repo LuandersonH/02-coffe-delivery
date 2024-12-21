@@ -20,10 +20,6 @@ export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
    
   const {shopAmounts, setShopAmounts} = useContext(Teste)
 
-  // const [shopAmounts, setShopAmounts] = useState(
-  //   () => cards.map(() => 0) // Inicializa com 0 para cada card
-  // );
-
   const updateShopAmount = (index: number, amount: number) => {
     setShopAmounts((state) =>
       state.map((value, i) => (i === index ? value + amount : value))
@@ -33,7 +29,7 @@ export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
   return (
     <CoffeListContainer>
       {cards.map((el, index) => {
-        if (filterCoffeValue == undefined) {
+        if (filterCoffeValue) {
         return (            
           <CoffeCard key={index}>
           <div className="imgCard">
