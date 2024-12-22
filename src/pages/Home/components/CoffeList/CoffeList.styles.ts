@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const CoffeListContainer = styled.div`
   width: 70rem;
   display: flex;
@@ -9,6 +10,7 @@ export const CoffeListContainer = styled.div`
   justify-content: start;
   gap: 2.5rem 2rem;
 `;
+
 
 export const CoffeCard = styled.div`
   display: flex;
@@ -26,6 +28,10 @@ export const CoffeCard = styled.div`
     img {
       height: 120px;
     }
+  }
+
+  .typeCardSpan {
+    display: flex;
   }
 
   .typeCard {

@@ -1,7 +1,7 @@
 import { ShoppingCart } from "phosphor-react";
 import { CardFooter, CoffeCard, CoffeListContainer } from "./CoffeList.styles";
 import { useContext } from "react";
-import { Teste } from "../../../../Contexts/ShopContext";
+import { ShopContextProvider } from "../../../../Contexts/ShopContext";
 
 interface CardsData {
   img: string;
@@ -17,7 +17,7 @@ interface CardDetailsProps {
 }
 
 export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
-  const { shopAmounts, setShopAmounts } = useContext(Teste);
+  const { shopAmounts, setShopAmounts } = useContext(ShopContextProvider);
 
   const updateShopAmount = (index: number, amount: number) => {
     setShopAmounts((state) =>
@@ -29,14 +29,24 @@ export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
     <CoffeListContainer>
       {cards
         .filter((el) =>
-          filterCoffeValue.some((tipoDeCaféExistenteEmFilterCoffeValue) => el.typeCoffe.includes(tipoDeCaféExistenteEmFilterCoffeValue))
+          filterCoffeValue.some((tipoDeCaféExistenteEmFilterCoffeValue) =>
+            el.typeCoffe.includes(tipoDeCaféExistenteEmFilterCoffeValue)
+          )
         )
         .map((el, index) => (
           <CoffeCard key={index}>
             <div className="imgCard">
               <img src={el.img} />
             </div>
-            <p className="typeCard">{el.typeCoffe}</p>
+            {el.typeCoffe.length == 1 ? (
+              <p className="typeCard">{el.typeCoffe}</p>
+            ) : (
+              <span className="typeCardSpan">
+                {el.typeCoffe.map((el, index) => (
+                  <p key={index} className="typeCard">{el}</p>
+                ))}
+              </span>
+            )}
             <p className="titleCard">{el.titleCoffe}</p>
             <p className="subtitleCard">{el.descriptionCoffe}</p>
             <CardFooter>

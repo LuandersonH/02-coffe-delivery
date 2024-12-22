@@ -39,22 +39,6 @@ export function CoffeListFilter({
     }
   }, [coffeTypesValues]);
 
-  // function EspecialButton(event: any) {
-  // setFilterCoffeValue("ESPECIAL");
-  // }
-
-  // function ComLeiteButton(event) {
-  //   setFilterCoffeValue("COM LEITE");
-  // }
-
-  // function AlcoólicoButton() {
-  //   setFilterCoffeValue("ALCOOLICO");
-  // }
-
-  // function GeladoButton() {
-  //   setFilterCoffeValue("GELADO");
-  // }
-
   return (
     <CoffeListFilterContainer>
       <div className="coffeListHeader">

@@ -19,7 +19,7 @@ import imgCubano from "./assets/coffes/imgCubano.png";
 import imgHavaiano from "./assets/coffes/imgHavaiano.png";
 import imgArabe from "./assets/coffes/imgArabe.png";
 import imgIrlandes from "./assets/coffes/imgIrlandes.png";
-import { Teste } from "./Contexts/ShopContext";
+import { ShopContextProvider } from "./Contexts/ShopContext";
 
 export interface cardsData {
   img: string;
@@ -181,11 +181,11 @@ export function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Teste.Provider value={{ shopAmounts, setShopAmounts }}>
+      <ShopContextProvider.Provider value={{ shopAmounts, setShopAmounts }}>
         <Header totalProdutos={totalProdutos} />
         <Home cards={cards}/>
         <GlobalStyle />
-      </Teste.Provider>
+      </ShopContextProvider.Provider>
     </ThemeProvider>
   );
 }

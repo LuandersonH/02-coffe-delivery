@@ -5,7 +5,7 @@ interface shopAmountTypes {
   setShopAmounts: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-export const Teste= createContext<shopAmountTypes>({
+export const ShopContextProvider= createContext<shopAmountTypes>({
     shopAmounts: [],
     setShopAmounts: ()=>{},
 })  
