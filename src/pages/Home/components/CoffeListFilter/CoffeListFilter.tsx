@@ -10,8 +10,6 @@ export function CoffeListFilter({
   filterCoffeValue,
   setFilterCoffeValue,
 }: CoffeListFilterProps) {
-  console.log(filterCoffeValue);
-
   const [coffeTypesValues, setcoffeTypesValues] = useState<string[]>([]);
 
   function HandleValueFilter(event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,9 +25,6 @@ export function CoffeListFilter({
   }
 
   useEffect(() => {
-    console.log(`coffeTypesValues ANTES: ${coffeTypesValues}`);
-    console.log(`filterCoffeValue ANTES: ${filterCoffeValue}`);
-
     if (filterCoffeValue.length > 0 && coffeTypesValues.length > 0) {
       setFilterCoffeValue([]);
       setFilterCoffeValue(coffeTypesValues);
@@ -42,10 +37,7 @@ export function CoffeListFilter({
         "GELADO",
       ]);
     }
-
-    console.log(`coffeTypesValues DEPOIS: ${coffeTypesValues}`);
-    console.log(`filterCoffeValue DEPOIS: ${filterCoffeValue}`);
-  });
+  }, [coffeTypesValues]);
 
   // function EspecialButton(event: any) {
   // setFilterCoffeValue("ESPECIAL");

@@ -25,8 +25,6 @@ export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
     );
   };
 
-  console.log(filterCoffeValue);
-
   return (
     <CoffeListContainer>
       {cards
