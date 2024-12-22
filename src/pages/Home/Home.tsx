@@ -15,8 +15,9 @@ interface CardsData {
 interface HomeProps {
   cards: CardsData[];
 }
+
 export function Home({ cards }: HomeProps) {
-  const [filterCoffeValue, setFilterCoffeValue ] = useState<string[]>([])
+  const [filterCoffeValue, setFilterCoffeValue ] = useState<string[]>(["TRADICIONAL", "ESPECIAL", "COM LEITE", "ALCOOLICO", "GELADO"])
 
   return (
     <HomeContainer>

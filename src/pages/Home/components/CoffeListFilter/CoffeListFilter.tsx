@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CoffeListFilterContainer } from "./CoffeListFilter.styles";
 
 interface CoffeListFilterProps {
   filterCoffeValue: string[];
-  setFilterCoffeValue: React.Dispatch<React.SetStateAction<string[]>>
+  setFilterCoffeValue: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function CoffeListFilter({
@@ -12,19 +12,40 @@ export function CoffeListFilter({
 }: CoffeListFilterProps) {
   console.log(filterCoffeValue);
 
+  const [coffeTypesValues, setcoffeTypesValues] = useState<string[]>([]);
+
   function HandleValueFilter(event: React.ChangeEvent<HTMLInputElement>) {
     const valor = event.target.value;
 
-    setFilterCoffeValue((state) => {
+    setcoffeTypesValues((state) => {
       if (event.target.checked) {
-        const updatedState = [...state, valor]; // Adiciona o valor ao array
-        console.log(updatedState); // Exibe o novo estado no console
-        return updatedState;
+        return [...state, valor];
       } else {
         return state.filter((item) => item !== valor);
-      }      
+      }
     });
   }
+
+  useEffect(() => {
+    console.log(`coffeTypesValues ANTES: ${coffeTypesValues}`);
+    console.log(`filterCoffeValue ANTES: ${filterCoffeValue}`);
+
+    if (filterCoffeValue.length > 0 && coffeTypesValues.length > 0) {
+      setFilterCoffeValue([]);
+      setFilterCoffeValue(coffeTypesValues);
+    } else if (coffeTypesValues.length == 0) {
+      setFilterCoffeValue([
+        "TRADICIONAL",
+        "ESPECIAL",
+        "COM LEITE",
+        "ALCOOLICO",
+        "GELADO",
+      ]);
+    }
+
+    console.log(`coffeTypesValues DEPOIS: ${coffeTypesValues}`);
+    console.log(`filterCoffeValue DEPOIS: ${filterCoffeValue}`);
+  });
 
   // function EspecialButton(event: any) {
   // setFilterCoffeValue("ESPECIAL");
@@ -35,7 +56,7 @@ export function CoffeListFilter({
   // }
 
   // function AlcoólicoButton() {
-  //   setFilterCoffeValue("ALCOÓLICO");
+  //   setFilterCoffeValue("ALCOOLICO");
   // }
 
   // function GeladoButton() {
