@@ -1,23 +1,24 @@
 import { ShoppingCart } from "phosphor-react";
 import { CardFooter, CoffeCard, CoffeListContainer } from "./CoffeList.styles";
 import { useContext } from "react";
-import { ShopContextProvider } from "../../../../Contexts/ShopContext";
+import { CardsContext } from "../../../../Contexts/CardsContext";
 
-interface CardsData {
-  img: string;
-  typeCoffe: string[];
-  titleCoffe: string;
-  descriptionCoffe: string;
-  valueCoffe: number;
-}
+// interface CardsData {
+//   img: string;
+//   typeCoffe: string[];
+//   titleCoffe: string;
+//   descriptionCoffe: string;
+//   valueCoffe: number;
+// }
 
 interface CardDetailsProps {
-  cards: CardsData[];
+  // cards: CardsData[];
   filterCoffeValue: string[];
 }
 
-export function CoffeList({ cards, filterCoffeValue }: CardDetailsProps) {
-  const { shopAmounts, setShopAmounts } = useContext(ShopContextProvider);
+export function CoffeList({ filterCoffeValue }: CardDetailsProps) {
+
+  const {cards, shopAmounts, setShopAmounts} = useContext(CardsContext)
 
   const updateShopAmount = (index: number, amount: number) => {
     setShopAmounts((state) =>

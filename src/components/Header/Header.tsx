@@ -1,12 +1,16 @@
 import { HeaderContainer } from "./Header.styles";
 import logo from "../../assets/logo.png";
 import { MapPin, ShoppingCart } from "phosphor-react";
+import { CardsContext } from "../../Contexts/CardsContext";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
-interface headerProps {
-  totalProdutos: number;
-}
+// interface headerProps {
+//   totalProdutos: number;
+// }
 
-export function Header({ totalProdutos }: headerProps) {
+export function Header() {
+  const { totalProdutos } = useContext(CardsContext);
 
   return (
     <HeaderContainer>
@@ -21,9 +25,13 @@ export function Header({ totalProdutos }: headerProps) {
           </div>
           <div className="shop">
             <span>
-              <ShoppingCart size={22} weight="fill" />
+              <NavLink to="/checkout" title="Checkout">
+                <ShoppingCart size={22} weight="fill" />
+              </NavLink>
             </span>
-            {totalProdutos > 0 && <div className="countShop">{totalProdutos}</div>}
+            {totalProdutos > 0 && (
+              <div className="countShop">{totalProdutos}</div>
+            )}
           </div>
         </div>
       </div>
