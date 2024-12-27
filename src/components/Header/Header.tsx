@@ -15,9 +15,9 @@ export function Header() {
   return (
     <HeaderContainer>
       <div>
-        <div>
+        <NavLink to="/" title="Home">
           <img src={logo} alt="" />
-        </div>
+        </NavLink>
         <div>
           <div className="local">
             <MapPin size={22} weight="fill" />

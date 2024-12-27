@@ -17,14 +17,28 @@ interface CardDetailsProps {
 }
 
 export function CoffeList({ filterCoffeValue }: CardDetailsProps) {
+  const { cards, setCards, shopAmounts, setShopAmounts } =
+    useContext(CardsContext);
 
-  const {cards, shopAmounts, setShopAmounts} = useContext(CardsContext)
-
-  const updateShopAmount = (index: number, amount: number) => {
-    setShopAmounts((state) =>
-      state.map((value, i) => (i === index ? value + amount : value))
-    );
-  };
+    const updateShopAmount = (index: number, amount: number) => {
+      setCards((prevCards) => {
+        // Copia o array do state 'cards'
+        const updatedCards = [...prevCards];
+        // Pega o card no indice e 'remove' do objeto
+        const updatedCard = { ...updatedCards[index] };
+        // Atualiza a quantidade no card
+        updatedCard.shopAmount += amount;
+        // Acha o card antigo no array copiado e substitui o card
+        updatedCards[index] = updatedCard;
+        return updatedCards;
+      });
+    
+      setShopAmounts((state) => {
+        // Modifica o número que fica na bolinha do carrinho de compras
+        return state.map((value, i) => (i === index ? value + amount : value));
+      });
+    };
+    
 
   return (
     <CoffeListContainer>
@@ -44,7 +58,9 @@ export function CoffeList({ filterCoffeValue }: CardDetailsProps) {
             ) : (
               <span className="typeCardSpan">
                 {el.typeCoffe.map((el, index) => (
-                  <p key={index} className="typeCard">{el}</p>
+                  <p key={index} className="typeCard">
+                    {el}
+                  </p>
                 ))}
               </span>
             )}

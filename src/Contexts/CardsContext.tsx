@@ -28,6 +28,7 @@ interface CardsContextType {
   cards: cardsData[]; // Representa o array de cards no contexto
   shopAmounts: number[];
   setShopAmounts: React.Dispatch<React.SetStateAction<number[]>>;
+  setCards: React.Dispatch<React.SetStateAction<cardsData[]>>;
   totalProdutos: number;
 }
 
@@ -176,7 +177,7 @@ export function CardsContextProvider({ children }: CardsContextProviderProps) {
   );
 
   return (
-    <CardsContext.Provider value={{ cards, shopAmounts, setShopAmounts, totalProdutos}}>{children}</CardsContext.Provider>
+    <CardsContext.Provider value={{ cards, setCards, shopAmounts, setShopAmounts, totalProdutos}}>{children}</CardsContext.Provider>
   );
 }
 
