@@ -1,4 +1,4 @@
-import imgTradicional from "../assets/coffes/imgAmericano.png";
+import imgTradicional from "../assets/coffes/imgTradicional.png";
 import imgAmericano from "../assets/coffes/imgAmericano.png";
 import imgCremoso from "../assets/coffes/imgExpressoCremoso.png";
 import imgGelado from "../assets/coffes/imgExpressoGelado.png";
@@ -30,6 +30,7 @@ interface CardsContextType {
   setShopAmounts: React.Dispatch<React.SetStateAction<number[]>>;
   setCards: React.Dispatch<React.SetStateAction<cardsData[]>>;
   totalProdutos: number;
+  updateShopAmount: (index: number, amount: number) => void;
 }
 
 interface CardsContextProviderProps {
@@ -40,6 +41,9 @@ export const CardsContext = createContext<CardsContextType>({
     cards: [],
     shopAmounts: [],
     setShopAmounts: () => {},
+    setCards: () => {},
+    totalProdutos: 0,
+    updateShopAmount: () => {},
   });
   
 
@@ -176,8 +180,29 @@ export function CardsContextProvider({ children }: CardsContextProviderProps) {
     0
   );
 
+  const updateShopAmount = (index: number, amount: number) => {
+    setCards((prevCards) => {
+      // Copia o array do state 'cards'
+      const updatedCards = [...prevCards];
+      // Pega o card no indice e 'remove' do objeto
+      const updatedCard = { ...updatedCards[index] };
+      // Atualiza a quantidade no card
+      updatedCard.shopAmount += amount;
+      // Acha o card antigo no array copiado e substitui o card
+      updatedCards[index] = updatedCard;
+      return updatedCards;
+    });
+  
+    setShopAmounts((state) => {
+      // Modifica o número que fica na bolinha do carrinho de compras
+      return state.map((value, i) => (i === index ? value + amount : value));
+    });
+  };
+
+
+
   return (
-    <CardsContext.Provider value={{ cards, setCards, shopAmounts, setShopAmounts, totalProdutos}}>{children}</CardsContext.Provider>
+    <CardsContext.Provider value={{ cards, setCards, shopAmounts, setShopAmounts, totalProdutos, updateShopAmount}}>{children}</CardsContext.Provider>
   );
 }
 

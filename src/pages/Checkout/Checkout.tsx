@@ -5,7 +5,11 @@ import {
   MapPinLine,
   Money,
 } from "phosphor-react";
-import { CheckoutContainer } from "./Checkout.styles";
+import {
+  CardsInShop,
+  CheckoutContainer,
+  CheckoutOrderContainer,
+} from "./Checkout.styles";
 import { useContext, useEffect, useState } from "react";
 import { CardsContext } from "../../Contexts/CardsContext";
 
@@ -18,59 +22,28 @@ interface cardsData {
   shopAmount: number;
 }
 
-interface cardsInShopInterface {
-  cardsInShop: cardsData[];
-  setCardsInShop: React.Dispatch<React.SetStateAction<[]>>;
-}
-
 export function Checkout() {
-  const { cards, totalProdutos } = useContext(CardsContext);
+  const { cards, shopAmounts, updateShopAmount } = useContext(CardsContext);
 
   const [cardsInShop, setCardsInShop] = useState<cardsData[]>([]);
 
   useEffect(() => {
     // Filtra os cards com shopAmount > 0
     const filteredCards = cards.filter((el) => el.shopAmount > 0);
-  
+
     // Atualiza o estado cardsInShop com os cards filtrados
     setCardsInShop(filteredCards);
   }, [cards]);
-  
+
   // UseEffect para monitorar a mudança de cardsInShop
   useEffect(() => {
-    console.log('cardsInShop:', cardsInShop);
+    console.log("cardsInShop:", cardsInShop);
   }, [cardsInShop]); // Vai rodar sempre que cardsInShop mudar
-  
-  
-
-  
-
-  // useEffect(() => {
-  //   if (filterCoffeValue.length > 0 && coffeTypesValues.length > 0) {
-  //     setFilterCoffeValue([]);
-  //     setFilterCoffeValue(coffeTypesValues);
-  //   } else if (coffeTypesValues.length == 0) {
-  //     setFilterCoffeValue([
-  //       "TRADICIONAL",
-  //       "ESPECIAL",
-  //       "COM LEITE",
-  //       "ALCOOLICO",
-  //       "GELADO",
-  //     ]);
-  //   }
-  // }, [coffeTypesValues]);
 
   return (
     <CheckoutContainer>
       <div>
-        <button
-          onClick={() => {
-            console.log(cardsInShop);
-          }}
-        >
-          TESTEEEEEEEEE
-        </button>
-        <p>Complete seu pedido</p>
+        <p className="areaName">Complete seu pedido</p>
         <div className="checkoutForm">
           <div className="info">
             <span className="infoMapSvg">
@@ -156,24 +129,53 @@ export function Checkout() {
         </div>
       </div>
       <div>
-        <p>Cafés selecionados</p>
-        <div className="checkoutOrdemContainer">
-          <div>
-            <p>Aqui ficam os cafés</p>
-          </div>
-          <div>
-            <div className="checkoutValues">
-              <div>
-                <p>Total de itens</p>
-                <span>{`R$ 29,90`}$</span>
-              </div>
-              <div>
-                <p>Entrega</p>
-                <span>{`R$ 3,50`}</span>
-              </div>
+        <p className="areaName">Cafés selecionados</p>
+        <CheckoutOrderContainer>
+          {cards.map((el, index) => {
+            if (el.shopAmount > 0) {
+              return (
+                <CardsInShop>
+                  <div className="imgInCard">{cards[0].img}</div>
+                  <div className="infoCoffeAndButtonsContainer">
+                    <div className="infoCoffeInCard">
+                      <span>{cards[0].titleCoffe}</span>
+                      <span>{`R$ ${cards[0].valueCoffe}0`}</span>
+                    </div>
+                    <div className="buttonsInCard">
+                      <button
+                        onClick={() => updateShopAmount(index, -1)}
+                        disabled={shopAmounts[index] <= 0}
+                      >
+                        -
+                      </button>
+                      <span>{shopAmounts[index]}</span>
+                      <button onClick={() => updateShopAmount(index, +1)}>
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </CardsInShop>
+              );
+            }
+            
+          })}
+
+          <div className="checkoutValues">
+            <div>
+              <p>Total de itens</p>
+              <p>{`R$ 29,90`}</p>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <p>{`R$ 3,50`}</p>
+            </div>
+            <div className="checkoutValuesTotal">
+              <p>Total</p>
+              <p>{`R$ 33,40`}</p>
             </div>
           </div>
-        </div>
+          <button>CONFIRMAR PEDIDO</button>
+        </CheckoutOrderContainer>
       </div>
     </CheckoutContainer>
   );
