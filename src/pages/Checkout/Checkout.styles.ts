@@ -166,6 +166,96 @@ export const CheckoutOrderContainer = styled.div`
 `;
 
 export const CardsInShop = styled.div`
-  
-`
+  width: 23rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+
+  gap: 1.25rem;
+  
+
+  .imgInCard {
+    width: 4rem;
+    height: 4rem;
+
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  .infoCoffeAndButtonsContainer {
+    height: 4rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+
+  .infoCoffeInCard {
+    color: ${(props)=> props.theme["base-subtitle"]};
+  }
+
+  .buttonsInCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    > div {
+      width: 4.5rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: ${(props) => props.theme["base-button"]};
+      border-radius: 0.375rem;
+      gap: 0 0.25rem;
+      padding: 0.5rem;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        font-size: 1rem;
+        color: ${(props) => props.theme.purple};
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    .trashButton {
+      width: 5.6875rem;
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+
+        color: ${(props) => props.theme["base-text"]};
+        font-weight: normal;
+        
+        > svg {
+          color: ${(props) => props.theme.purple};
+        }
+      }
+    }
+  }
+
+  > span {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    font-weight: bold;
+    color: ${(props) => props.theme["base-text"]}
+  }
+`;

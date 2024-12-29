@@ -4,6 +4,7 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
+  Trash,
 } from "phosphor-react";
 import {
   CardsInShop,
@@ -23,9 +24,15 @@ interface cardsData {
 }
 
 export function Checkout() {
-  const { cards, shopAmounts, updateShopAmount } = useContext(CardsContext);
+  const { cards, shopAmounts, updateShopAmount, totalProdutos } =
+    useContext(CardsContext);
 
   const [cardsInShop, setCardsInShop] = useState<cardsData[]>([]);
+
+  const totalItensValue: number = cards.reduce((acc, el) => {
+    const totalValue = el.valueCoffe * el.shopAmount;
+    return acc + totalValue;
+  }, 0);
 
   useEffect(() => {
     // Filtra os cards com shopAmount > 0
@@ -131,50 +138,78 @@ export function Checkout() {
       <div>
         <p className="areaName">Cafés selecionados</p>
         <CheckoutOrderContainer>
-          {cards.map((el, index) => {
-            if (el.shopAmount > 0) {
-              return (
-                <CardsInShop>
-                  <div className="imgInCard">{cards[0].img}</div>
-                  <div className="infoCoffeAndButtonsContainer">
-                    <div className="infoCoffeInCard">
-                      <span>{cards[0].titleCoffe}</span>
-                      <span>{`R$ ${cards[0].valueCoffe}0`}</span>
+          {totalProdutos > 0 ? (
+            <>
+              {cards.map((el, index) => {
+                if (el.shopAmount > 0) {
+                  return (
+                    <div key={index}>
+                      <CardsInShop>
+                        <div className="imgInCard">
+                          <img
+                            src={cards[index].img}
+                            alt="Imagem do café selecionado"
+                          />
+                        </div>
+                        <div className="infoCoffeAndButtonsContainer">
+                          <div className="infoCoffeInCard">
+                            <span>{cards[index].titleCoffe}</span>
+                          </div>
+                          <div className="buttonsInCard">
+                            <div>
+                              <button
+                                onClick={() => updateShopAmount(index, -1)}
+                                disabled={shopAmounts[index] <= 1}
+                              >
+                                -
+                              </button>
+                              <span>{shopAmounts[index]}</span>
+                              <button
+                                onClick={() => updateShopAmount(index, +1)}
+                              >
+                                +
+                              </button>
+                            </div>
+                            <div className="trashButton">
+                              <button
+                                onClick={() =>
+                                  updateShopAmount(index, -el.shopAmount)
+                                }
+                              >
+                                <p>
+                                  <Trash size={16} />
+                                  Remover
+                                </p>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <span>{`R$ ${cards[index].valueCoffe}0`}</span>
+                      </CardsInShop>
                     </div>
-                    <div className="buttonsInCard">
-                      <button
-                        onClick={() => updateShopAmount(index, -1)}
-                        disabled={shopAmounts[index] <= 0}
-                      >
-                        -
-                      </button>
-                      <span>{shopAmounts[index]}</span>
-                      <button onClick={() => updateShopAmount(index, +1)}>
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </CardsInShop>
-              );
-            }
-            
-          })}
-
-          <div className="checkoutValues">
-            <div>
-              <p>Total de itens</p>
-              <p>{`R$ 29,90`}</p>
-            </div>
-            <div>
-              <p>Entrega</p>
-              <p>{`R$ 3,50`}</p>
-            </div>
-            <div className="checkoutValuesTotal">
-              <p>Total</p>
-              <p>{`R$ 33,40`}</p>
-            </div>
-          </div>
-          <button>CONFIRMAR PEDIDO</button>
+                  );
+                }
+                return null; // Sempre retorne algo no map, mesmo que seja null
+              })}
+              <div className="checkoutValues">
+                <div>
+                  <p>Total de itens</p>
+                  <p>{`R$ ${totalItensValue.toFixed(2)}`}</p>
+                </div>
+                <div>
+                  <p>Entrega</p>
+                  <p>{`R$ 3.50`}</p>
+                </div>
+                <div className="checkoutValuesTotal">
+                  <p>Total</p>
+                  <p>{`R$ ${(totalItensValue + 3.5).toFixed(2)}`}</p>
+                </div>
+              </div>
+              <button>CONFIRMAR PEDIDO</button>
+            </>
+          ) : (
+            <p>Faça um pedido antes</p>
+          )}
         </CheckoutOrderContainer>
       </div>
     </CheckoutContainer>

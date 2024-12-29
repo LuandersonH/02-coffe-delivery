@@ -182,6 +182,8 @@ export function CardsContextProvider({ children }: CardsContextProviderProps) {
 
   const updateShopAmount = (index: number, amount: number) => {
     setCards((prevCards) => {
+      
+      
       // Copia o array do state 'cards'
       const updatedCards = [...prevCards];
       // Pega o card no indice e 'remove' do objeto
