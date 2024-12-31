@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
 export const IntroContainer = styled.div`
+  width: 100%;
+  height: 34rem;
+
   display: flex;
   align-items: row;
-  height: 34rem;
+  justify-content: space-between;
+
   padding: 5.75rem 10rem;
   gap: 56px;
 
@@ -45,17 +49,16 @@ export const IntroContainer = styled.div`
     color: ${(props) => props.theme["base-text"]};
 
     p {
-        display: flex;
-        align-items: center;
-        gap: 0 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0 0.75rem;
 
-        svg {
+      svg {
         width: 2rem;
         height: 2rem;
         padding: 0.5rem;
         color: white;
         border-radius: 50%;
-        
       }
     }
 

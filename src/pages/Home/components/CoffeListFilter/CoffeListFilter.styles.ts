@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const CoffeListFilterContainer = styled.div`
-  width: 70rem;
+  width: 100%;
   height: auto;
-  padding: 5.75rem 0rem;
+  padding: 5.75rem 10rem;
 
   .coffeListHeader {
     display: flex;

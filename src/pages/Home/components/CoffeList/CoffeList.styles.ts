@@ -1,27 +1,31 @@
 import styled from "styled-components";
 
-
 export const CoffeListContainer = styled.div`
-  width: 70rem;
+  width: 100%;
+  padding: 0rem 10rem;
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
   align-items: center;
   justify-content: start;
-  gap: 2.5rem 2rem;
+
+  gap: 2.5rem 4.15rem;
 `;
 
-
 export const CoffeCard = styled.div`
+  width: 16rem;
+  height: 19.375rem;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   text-align: center;
-  width: 256px;
-  height: 310px;
-  background-color: ${(props) => props.theme["base-card"]};
-  gap: 0px;
 
+  background-color: ${(props) => props.theme["base-card"]};
+  
   .imgCard {
     margin-top: -20px;
     margin-bottom: 8px;
