@@ -148,20 +148,27 @@ export const CheckoutOrderContainer = styled.div`
     }
   }
 
-  button {
+  .buttonContainer {
     width: 100%;
     height: 2.875rem;
-    padding: 0.75rem 0.5rem;
-    border-radius: 0.375rem;
+    
 
-    background-color: ${(props) => props.theme.yellow};
+    button {
+      width: 100%;
+      height: 2.875rem;
+      padding: 0.75rem 0.5rem;
+      border-radius: 0.375rem;
 
-    color: ${(props) => props.theme.white};
-    font-size: 0.875rem;
-    font-weight: bold;
-    line-height: 1.6;
-
-    border: none;
+      
+      background-color: ${(props) => props.theme.yellow};
+      color: ${(props) => props.theme.white};
+      font-size: 0.875rem;
+      font-weight: bold;
+      line-height: 1.6;
+      
+      cursor: pointer;
+      border: none;
+    }
   }
 `;
 
@@ -174,7 +181,6 @@ export const CardsInShop = styled.div`
   position: relative;
 
   gap: 1.25rem;
-  
 
   .imgInCard {
     width: 4rem;
@@ -196,7 +202,7 @@ export const CardsInShop = styled.div`
   }
 
   .infoCoffeInCard {
-    color: ${(props)=> props.theme["base-subtitle"]};
+    color: ${(props) => props.theme["base-subtitle"]};
   }
 
   .buttonsInCard {
@@ -242,7 +248,7 @@ export const CardsInShop = styled.div`
 
         color: ${(props) => props.theme["base-text"]};
         font-weight: normal;
-        
+
         > svg {
           color: ${(props) => props.theme.purple};
         }
@@ -256,6 +262,6 @@ export const CardsInShop = styled.div`
     right: 0;
 
     font-weight: bold;
-    color: ${(props) => props.theme["base-text"]}
+    color: ${(props) => props.theme["base-text"]};
   }
 `;

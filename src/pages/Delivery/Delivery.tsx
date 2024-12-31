@@ -1,4 +1,6 @@
 import { DeliveryContainer } from "./Delivery.styles";
+import imgDelivery from "../../assets/delivery.png";
+import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
 
 export function Delivery() {
   return (
@@ -8,23 +10,33 @@ export function Delivery() {
         <p>Agora é só aguardar que logo o café chegará até você</p>
       </div>
       <div className="infoAndImgContainer">
-        <div className="OrderDetails">
-          <p>
-            <span>Entrega em:</span> Rua João Daniel Martinelli, 102
-            <br /> Farrapos - Porto Alegre, RS
-          </p>
-          <p>
-            <span>Previsão de entrega:</span> 20 min - 30 min
-          </p>
-          <p>
-            <span>Pagamento na entrega:</span> Cartão de Crédito
-          </p>
+        <div className="OrderDetailsContainer">
+          <div className="OrderDetails">
+            <div>
+              <MapPin weight="fill" className="MapPin"/>
+              <div>
+                <p>Entrega em: <strong>Rua João Daniel Martinelli, 102</strong></p>
+                <p>Farrapos - Porto Alegre, RS</p>
+              </div>
+            </div>
+            <div>
+              <Timer weight="fill" className="Timer"/>
+              <div>
+                <p>Previsão de entrega:</p>
+                <p><strong>20min - 30min</strong></p>
+              </div>
+            </div>
+            <div>
+              <CurrencyDollar weight="fill" className="CurrencyDollar"/>
+              <div>
+                <p>Pagamento na entrega:</p>
+                <p><strong>Cartão de Crédito</strong></p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="imgContainer">
-          <img
-            src="/path-to-your-image.png"
-            alt="Imagem do entregador em moto"
-          />
+          <img src={imgDelivery} alt="Imagem do entregador em moto" />
         </div>
       </div>
     </DeliveryContainer>

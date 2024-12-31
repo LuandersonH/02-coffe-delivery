@@ -13,6 +13,7 @@ import {
 } from "./Checkout.styles";
 import { useContext, useEffect, useState } from "react";
 import { CardsContext } from "../../Contexts/CardsContext";
+import { NavLink } from "react-router-dom";
 
 interface cardsData {
   img: string;
@@ -205,7 +206,9 @@ export function Checkout() {
                   <p>{`R$ ${(totalItensValue + 3.5).toFixed(2)}`}</p>
                 </div>
               </div>
+              <NavLink to="/delivery" className="buttonContainer">
               <button>CONFIRMAR PEDIDO</button>
+              </NavLink>
             </>
           ) : (
             <p>Faça um pedido antes</p>
