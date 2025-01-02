@@ -91,7 +91,8 @@ export const CheckoutContainer = styled.div`
 
       background-color: ${(props) => props.theme["base-button"]};
 
-      > p {
+      > button {
+        border: none;
         font-size: 0.75rem;
       }
     }

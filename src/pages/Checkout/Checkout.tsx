@@ -14,6 +14,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { CardsContext } from "../../Contexts/CardsContext";
 import { NavLink } from "react-router-dom";
+import { FormContext } from "../../Contexts/FormContext";
 
 interface cardsData {
   img: string;
@@ -27,6 +28,8 @@ interface cardsData {
 export function Checkout() {
   const { cards, shopAmounts, updateShopAmount, totalProdutos } =
     useContext(CardsContext);
+
+  const { form, setForm, handlePaymentMethod } = useContext(FormContext);
 
   const [cardsInShop, setCardsInShop] = useState<cardsData[]>([]);
 
@@ -48,6 +51,36 @@ export function Checkout() {
     console.log("cardsInShop:", cardsInShop);
   }, [cardsInShop]); // Vai rodar sempre que cardsInShop mudar
 
+  const [formValues, setFormValues] = useState({
+    cep: 0,
+    rua: "",
+    numero: 0,
+    complemento: "",
+    bairro: "",
+    cidade: "",
+    uf: "",
+  });
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+
+    // Converte para número se o campo for "cep" ou "numero"
+    const parsedValue =
+      name === "cep" || name === "numero" ? Number(value) : value;
+
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: parsedValue,
+    }));
+  }
+
+  function handleSubmit() {
+    setForm((prev) => ({
+      ...prev,
+      ...formValues,
+    }));
+  }
+
   return (
     <CheckoutContainer>
       <div>
@@ -68,11 +101,21 @@ export function Checkout() {
                 type="number"
                 placeholder="CEP"
                 style={{ width: "12.5rem" }}
+                name="cep"
+                value={formValues.cep === 0 ? "" : formValues.cep}
+                onChange={handleInputChange}
               />
             </span>
 
             <span>
-              <input type="text" placeholder="Rua" style={{ width: "100%" }} />
+              <input
+                type="text"
+                placeholder="Rua"
+                style={{ width: "100%" }}
+                name="rua"
+                value={formValues.rua}
+                onChange={handleInputChange}
+              />
             </span>
 
             <span>
@@ -80,11 +123,17 @@ export function Checkout() {
                 type="number"
                 placeholder="Número"
                 style={{ width: "12.5rem" }}
+                name="numero"
+                value={formValues.numero === 0 ? "" : formValues.numero}
+                onChange={handleInputChange}
               />
               <input
                 type="text"
                 placeholder="Complemento"
                 style={{ width: "21.75rem" }}
+                name="complemento"
+                value={formValues.complemento}
+                onChange={handleInputChange}
               />
             </span>
 
@@ -93,17 +142,26 @@ export function Checkout() {
                 type="text"
                 placeholder="Bairro"
                 style={{ width: "12.5rem" }}
+                name="bairro"
+                value={formValues.bairro}
+                onChange={handleInputChange}
               />
               <input
                 type="text"
                 placeholder="Cidade"
                 style={{ width: "17.25rem" }}
+                name="cidade"
+                value={formValues.cidade}
+                onChange={handleInputChange}
               />
               <input
                 type="text"
                 placeholder="UF"
                 style={{ width: "3.75rem" }}
                 maxLength={2}
+                name="uf"
+                value={formValues.uf}
+                onChange={handleInputChange}
               />
             </span>
           </form>
@@ -123,15 +181,33 @@ export function Checkout() {
           <div className="methods">
             <div>
               <CreditCard size={16} />
-              <p>CARTÃO DE CRÉDITO</p>
+              <button
+                onClick={() => {
+                  handlePaymentMethod("CREDITO");
+                }}
+              >
+                CARTÃO DE CRÉDITO
+              </button>
             </div>
             <div>
               <Bank size={16} />
-              <p>CARTÃO DE DEBITO</p>
+              <button
+                onClick={() => {
+                  handlePaymentMethod("DEBITO");
+                }}
+              >
+                CARTÃO DE DEBITO
+              </button>
             </div>
             <div>
               <Money size={16} />
-              <p>DINHEIRO</p>
+              <button
+                onClick={() => {
+                  handlePaymentMethod("DINHEIRO");
+                }}
+              >
+                DINHEIRO
+              </button>
             </div>
           </div>
         </div>
@@ -207,7 +283,8 @@ export function Checkout() {
                 </div>
               </div>
               <NavLink to="/delivery" className="buttonContainer">
-              <button>CONFIRMAR PEDIDO</button>
+                <button onClick={()=>{ console.log({...formValues});
+                 handleSubmit()}}>CONFIRMAR PEDIDO</button>
               </NavLink>
             </>
           ) : (

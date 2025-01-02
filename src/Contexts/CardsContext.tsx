@@ -38,17 +38,16 @@ interface CardsContextProviderProps {
 }
 
 export const CardsContext = createContext<CardsContextType>({
-    cards: [],
-    shopAmounts: [],
-    setShopAmounts: () => {},
-    setCards: () => {},
-    totalProdutos: 0,
-    updateShopAmount: () => {},
-  });
-  
+  cards: [],
+  shopAmounts: [],
+  setShopAmounts: () => {},
+  setCards: () => {},
+  totalProdutos: 0,
+  updateShopAmount: () => {},
+});
 
 export function CardsContextProvider({ children }: CardsContextProviderProps) {
-    const [cards, setCards] = useState<cardsData[]>([
+  const [cards, setCards] = useState<cardsData[]>([
     {
       img: imgTradicional,
       typeCoffe: ["TRADICIONAL"],
@@ -174,16 +173,11 @@ export function CardsContextProvider({ children }: CardsContextProviderProps) {
   ]);
 
   const [shopAmounts, setShopAmounts] = useState(() => cards.map(() => 0));
-  
-  const totalProdutos = shopAmounts.reduce(
-    (total, el) => total + el,
-    0
-  );
+
+  const totalProdutos = shopAmounts.reduce((total, el) => total + el, 0);
 
   const updateShopAmount = (index: number, amount: number) => {
     setCards((prevCards) => {
-      
-      
       // Copia o array do state 'cards'
       const updatedCards = [...prevCards];
       // Pega o card no indice e 'remove' do objeto
@@ -194,17 +188,25 @@ export function CardsContextProvider({ children }: CardsContextProviderProps) {
       updatedCards[index] = updatedCard;
       return updatedCards;
     });
-  
+
     setShopAmounts((state) => {
       // Modifica o número que fica na bolinha do carrinho de compras
       return state.map((value, i) => (i === index ? value + amount : value));
     });
   };
 
-
-
   return (
-    <CardsContext.Provider value={{ cards, setCards, shopAmounts, setShopAmounts, totalProdutos, updateShopAmount}}>{children}</CardsContext.Provider>
+    <CardsContext.Provider
+      value={{
+        cards,
+        setCards,
+        shopAmounts,
+        setShopAmounts,
+        totalProdutos,
+        updateShopAmount,
+      }}
+    >
+      {children}
+    </CardsContext.Provider>
   );
 }
-
